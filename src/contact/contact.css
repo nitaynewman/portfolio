@@ -1,0 +1,136 @@
+.contact-container {
+    width: 80%;
+    margin: 5% 0% 10% 10%;
+    color: #fff;
+    border-radius: 8px;
+
+}
+.contact-container {
+    width: 80%;
+    margin-right: 10%;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.contact-box {
+    display: flex;
+    background-color: #081b29;
+
+}
+
+.contact-left {
+    flex-basis: 60%;
+    padding: 40px 60px;
+    background: #0c2537; 
+    /* background-color: #081b29; */
+}
+
+.contact-left * {
+    background: #0c2537 !important;
+}
+
+.contact-right {
+    flex-basis: 40%;
+    padding: 40px;
+    background: #063d65;
+    color: #fff;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+.contact-container p {
+    margin-bottom: 40px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.input-row .input-group {
+    flex-basis: 45%;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 5px;
+    color: #fff;
+}
+
+input{
+    border-radius: 8px;
+    border: 2px solid #00abf0;
+    padding: 10px;
+}
+textarea {
+    border: 1px solid #00abf0;
+    border-radius: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+label {
+    margin-bottom: 6px;
+    display: block;
+    color: #063d65;
+}
+
+.button {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 50px;
+    background-color: #00abf0; 
+    border: 2px solid #00abf0; 
+    border-radius: 8px;
+    font-size: 19px;
+    color: #081b29;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #0c2537;
+    color: #fff; 
+    transition: all 0.3s ease-in-out;
+}
+
+.contact-left h3 {
+    color: #00baf0;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.contact-right h3 {
+    font-weight: 600;
+    margin-bottom: 30px;
+    background: #063d65;
+
+}
+
+tr td:first-child {
+    padding-right: 20px;
+    background: #063d65;
+
+}
+
+tr td {
+    padding-top: 20px;
+    background: #063d65;
+
+}
+
+table {
+    background: #063d65;
+}
