@@ -2,6 +2,7 @@ import { useState } from "react";
 import './Js.css'
 import ReactPlayer from 'react-player'
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import "../App.css"
 
 function AccordionItems({ num, title, children, curOpen, onOpen }) {
     const isOpen = num === curOpen;
@@ -42,9 +43,9 @@ export default function Accordion({ data }) {
                     <div className="sides slide">
                         <p>{el.paragraph}</p>
                         <button>
-                          Git-Code
+                          <a className='LINK' href={`${el.git_url}`} target="_blank" rel="noopener noreferrer">GitHub-Code</a>
                         </button>
-                        <button href={el.url}>
+                        <button >
                           <Link to={`${el.url}`} className="LINK">Go To</Link>
                         </button>
                     </div>

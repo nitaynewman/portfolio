@@ -2,6 +2,7 @@ import './App.css';
 import Typed from 'typed.js'
 import React, { useEffect, useRef } from 'react';
 import Navbar from './navbar';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
        
 
@@ -28,18 +29,30 @@ export default function Section({ Strings, Title, Paragraph }) {
         <Navbar />
           <div className="home-content">
               <h1>{ Title }</h1>
-              <h3>I'm a <span ref={typedRef}></span></h3>
+              <h3><span ref={typedRef}></span></h3>
               <p>
                   { Paragraph }
               </p>
               <div className="btn-box">
-                  <a href="/">Information</a>
-                  <a href="/">Let's Talk</a>
+                  <a>
+                    <Link path='/' className="LInk">
+                      Information
+                    </Link>
+                  </a>
+                  <a>
+                  <Link to='/contact' className="LInk">
+                    Let's Talk
+                  </Link>
+                  </a>
               </div>
           </div>
           <div className="home-sci">
-              <a href="/"><i className="bx bxl-facebook"></i></a>
-              <a href="/"><i className="bx bxl-twitter"></i></a>
+              <a>
+              <Link to="/contact" >
+                <li className="bx bxl-gmail"></li>
+              </Link>
+              </a>
+              <a href="https://github.com/nitaynewman?tab=repositories"><i className="bx bxl-github"></i></a>
               <a href="/"><i className="bx bxl-linkedin"></i></a>
           </div>
           <span className="home-imgHover"></span>

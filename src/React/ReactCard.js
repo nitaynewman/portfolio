@@ -1,5 +1,6 @@
 import React from 'react';
 import './React.css';
+import '../App.css'
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import ReactPlayer from 'react-player'
 import React_Projects from '../all_projects.json';
@@ -27,10 +28,12 @@ export default function JsCards() {
                     >
                         <h3>{project.title}</h3>
                         <p>{project.paragraph}</p>
+                        <button className='BTNN '>
+                            <a className='LINK' href={`${project.git_url}`} target="_blank" rel="noopener noreferrer">GitHub Code</a>
+                        </button>
                         <button className='BTNN'>
                             <Link to={`${project.url}`} className="LINK">Go To</Link>
                         </button>
-                        <button className='BTNN'>GitHub Code</button>
                         <ReactPlayer 
                         className='video'
                         url={project.video}

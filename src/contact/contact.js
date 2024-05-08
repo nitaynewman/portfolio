@@ -1,190 +1,134 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import './contact.css'
+import Swal from 'sweetalert2';
 import Navbar from '../navbar';
+// var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
 
-export default function Contact() {
-  const form = useRef();
-  const sendEmail = (e) => {
-    e.preventDefault();
+const ContactForm = () => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
 
-    emailjs
-      .sendForm('service_pmgxo1s', 'template_jj84qun', form.current, {
-        publicKey: 'TUo92Y0oy-H-qUGHG',
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
+  const sendEmail = () => {
+      const bodyMessage = `Full Name: ${fullName}\nEmail: ${email}\nPhone Number: ${phone}\nMessage: ${message}`;
+      window.Email.send({
+          SecureToken : "232b1529-ae0b-4939-be9c-79aea349f74d",
+          // Host: "smtp.elasticemail.com",
+          // Username: "nitaybusines@gmail.com",
+          // Password: "D6E9199F58848EBE92BEDF6C1A46CECCADD5",
+          // Port: 2525,
+          To: 'nitaybusines@gmail.com',
+          From: "nitaybusines@gmail.com",
+          Subject: subject,
+          Body: bodyMessage
+      }).then(
+          message => {
+              if (message === "OK") {
+                  Swal.fire({
+                      title: "Success!",
+                      text: "Message sent successfully!",
+                      icon: "success"
+                  });
+              } else {
+                  Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: "Something went wrong!",
+                      footer: '<a href="#">contact me in phone: 0584680232</a>'
+                  });
+              }
+          }
       );
   };
 
+  const checkInputs = () => {
+      return fullName.trim() !== '' && email.trim() !== '' && phone.trim() !== '' && subject.trim() !== '' && message.trim() !== '';
+  };
+
+  const handleSubmit = e => {
+      e.preventDefault();
+      if (checkInputs()) {
+          sendEmail();
+          e.target.reset();
+      } else {
+          // Handle errors, maybe display an error message
+          console.log('Form has errors');
+      }
+  };
+
   return (
-      <div className='contact-container'>
-        <Navbar />
-           <h1>Contact Me</h1>
-           <p>I would love to respond to your effort. Feel free to get in touch with me😊</p>    
-           <div className='contact-box'>
-              <div className='contact-left'>
-                  <h3>Send your respons</h3>
-                  <form>
-                      <div className='input-row'>
-                          <div className='input-group'>
-                              <label>Name</label>
-                              <input type='text' placeholder='Nitay Newman' />
-                          </div>
-                          <div className='input-group'>
-                              <label>Phone</label>
-                              <input type='text' placeholder='+972-123456789'/>
-                          </div>
-                      </div>
-                      <div className='input-row'>
-                          <div className='input-group'>
-                              <label>Gmail</label>
-                              <input type='gmail' placeholder='nitaynewman@gmail.com' />
-                          </div>
-                          <div className='input-group'>
-                              <label>Subject</label>
-                              <input type='text' placeholder='Enter your contact info here'/>
-                          </div>
-                      </div>
-                      <label>Message</label>
-                      <textarea rows='5' placeholder='Enter your message here'></textarea>
-                      <button type='submit' className='button'>SEND</button>
-                  </form>
+    <div style={{display:"flex", justifyContent:"center"}}>
+      <Navbar />
+      <section className="contact">
+          <h2>Contact Me!</h2>
+          <form onSubmit={handleSubmit} className="contact-form">
+              <div className="input-box">
+                  <div className="input-field field">
+                      <input
+                          type="text"
+                          placeholder="Full Name"
+                          className="item"
+                          value={fullName}
+                          onChange={e => setFullName(e.target.value)}
+                          autoComplete="off"
+                          />
+                      <div className="error-txt">Full Name can't be blank</div>
+                  </div>
+                  <div className="input-field field">
+                      <input
+                          type="text"
+                          placeholder="Email"
+                          className="item"
+                          value={email}
+                          onChange={e => setEmail(e.target.value)}
+                          autoComplete="off"
+                          />
+                      <div className="error-txt email">Email Address can't be blank</div>
+                  </div>
               </div>
-              <div className='contact-right'>
-                  <h3>Reach Me</h3>
-                  <table>
-                      <tr>
-                          <td>Email</td>
-                          <td>contactme@gmail.com</td>
-                      </tr>
-                      <tr>
-                          <td>Phone</td>
-                          <td>+972-123-456-789</td>
-                      </tr>
-                  </table>
-
+              <div className="input-box">
+                  <div className="input-field field">
+                      <input
+                          type="text"
+                          placeholder="Phone Number"
+                          className="item"
+                          value={phone}
+                          onChange={e => setPhone(e.target.value)}
+                          autoComplete="off"
+                          />
+                      <div className="error-txt">Phone Number can't be blank</div>
+                  </div>
+                  <div className="input-field field">
+                      <input
+                          type="text"
+                          placeholder="Subject"
+                          className="item"
+                          value={subject}
+                          onChange={e => setSubject(e.target.value)}
+                          autoComplete="off"
+                          />
+                      <div className="error-txt">Subject can't be blank</div>
+                  </div>
               </div>
-           </div>
-
-      </div>
-
-
-
-        // <section>
-        //     <div className='container'>
-        //         <h2 ref={form} onSubmit={sendEmail} className='--text-center'>Contact Me</h2>
-        //         <form className='--form-control --card --flex-center --dir-column'>
-        //             <input type='text' placeholder='Full Name' name='user_name' required />
-        //             <input type='email' placeholder='Email Adress' name='user_email' required />
-        //             <input type='text' placeholder='Subject' name='subject' required />
-        //             <textarea name='message' cols='30' rows='10'></textarea>
-        //             <button type='submit' className='--btn --btn-primary'>Send Message</button>
-        //         </form>
-        //     </div>
-        // </section>
+              <div className="textarea-field field">
+                  <textarea
+                      cols="30"
+                      rows="10"
+                      className="item"
+                      placeholder="Your Message"
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      autoComplete="off"
+                      ></textarea>
+                  <div className="error-txt">Message can't be blank</div>
+              </div>
+              <button type="submit">Send Message</button>
+          </form>
+      </section>
+    </div>
   );
 };
 
-
-
-// import {useRef} from 'react'
-// import emailjs from '@emailjs/browser'
-
-// export default function Contact() {
-//     const form = useRef();
-//     let SERVICE_ID = 'service_pmgxo1s'
-//     let TEMPLATE_ID = 'template_jj84qun'
-//     let PUBLIC_KEY = 'TUo92Y0oy-H-qUGHG'
-//     const sendEmail = (e) => {
-//         e.preventDefault();
-    
-//         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
-//             publicKey: PUBLIC_KEY,
-//           })
-//           .then((result) => {
-//               console.log("it worked", result.text);
-//             },
-//             (error) => {
-//               console.log('FAILED...', error.text);
-//             },
-//           );
-//       };
-//         return(
-//         <section>
-//             <div className='container'>
-//                 <h2 ref={form} onSubmit={sendEmail} className='--text-center'>Contact Me</h2>
-//                 <form className='--form-control --card --flex-center --dir-column'>
-//                     <input type='text' placeholder='Full Name' name='user_name' required />
-//                     <input type='email' placeholder='Email Adress' name='user_email' required />
-//                     <input type='text' placeholder='Subject' name='subject' required />
-//                     <textarea name='message' cols='30' rows='10'></textarea>
-//                     <button type='submit' className='--btn --btn-primary'>Send Message</button>
-//                 </form>
-//             </div>
-//         </section>
-//     )
-//     // export default Contact()
-// }
-
-
-
-
-// import './contact.css'
-// export default function Contact() {
-    // return(
-    //     <div className='contact-container'>
-    //          <h1>Contact Me</h1>
-    //          <p>I would love to respond to your effort. Feel free to get in touch with me😊</p>    
-    //          <div className='contact-box'>
-    //             <div className='contact-left'>
-    //                 <h3>Send your respons</h3>
-    //                 <form>
-    //                     <div className='input-row'>
-    //                         <div className='input-group'>
-    //                             <label>Name</label>
-    //                             <input type='text' placeholder='Nitay Newman' />
-    //                         </div>
-    //                         <div className='input-group'>
-    //                             <label>Phone</label>
-    //                             <input type='text' placeholder='+972-123456789'/>
-    //                         </div>
-    //                     </div>
-    //                     <div className='input-row'>
-    //                         <div className='input-group'>
-    //                             <label>Gmail</label>
-    //                             <input type='gmail' placeholder='nitaynewman@gmail.com' />
-    //                         </div>
-    //                         <div className='input-group'>
-    //                             <label>Subject</label>
-    //                             <input type='text' placeholder='Enter your contact info here'/>
-    //                         </div>
-    //                     </div>
-    //                     <label>Message</label>
-    //                     <textarea rows='5' placeholder='Enter your message here'></textarea>
-    //                     <button type='submit' className='button'>SEND</button>
-    //                 </form>
-    //             </div>
-    //             <div className='contact-right'>
-    //                 <h3>Reach Me</h3>
-    //                 <table>
-    //                     <tr>
-    //                         <td>Email</td>
-    //                         <td>contactme@gmail.com</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>Phone</td>
-    //                         <td>+972-123-456-789</td>
-    //                     </tr>
-    //                 </table>
-
-    //             </div>
-    //          </div>
-
-    //     </div>
-    // )
-// }
+export default ContactForm;

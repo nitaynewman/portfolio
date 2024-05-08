@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import './slick.css'
 import './slick-theme.css'
 import './python.css'
+import '../App.css'
 // import 'react-html5video/dist/index'
 import ReactPlayer from 'react-player'
 
@@ -75,7 +76,9 @@ function Carousel({ data, title }) {
                             <div className="card-container">
                               <div className="sides">
                                 <p>{item.paragraph}</p>
-                                <button href={item.git_url}>Git-Code</button>
+                                <button>
+                                  <a className='LINK' href={`${item.git_url}`} target="_blank" rel="noopener noreferrer">GitHub-Code</a>
+                                  </button>
                                 <button href={item.git_url}>Download</button>
                               </div>
                               <div className="sides video-container">
