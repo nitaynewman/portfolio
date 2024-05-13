@@ -73,7 +73,7 @@
                 "title": "Blog",
                 "git_url": "https://github.com/nitaynewman/python-projects/tree/main/Flask/blog",
                 "video": "video/flask/authentication_blog.mp4",
-                "paragraph": "This is a flask blog app enjoy browsing it."
+                "paragraph": "This is a flask blog app. you can log in and seeread and comint on the sighte itself. if you have permissions like me you can create and edit the blogs enjoy browsing it."
             },
             {
                 "id": 3,
@@ -87,7 +87,7 @@
                 "title": "Cafe API",
                 "git_url": "https://github.com/nitaynewman/python-projects/tree/main/Flask/cafe_api",
                 "video": "video/flask/cafe_api.mp4",
-                "paragraph": "This cafe website finds all the cafes in your aria using an cafe api."
+                "paragraph": "This cafe website finds all the cafes in your aria using an cafe api. I use this API a lot because it has a lot of developer options as you can see in the next project."
             },
             {
                 "id": 5,
@@ -154,7 +154,7 @@
                 "title": "quizzler",
                 "git_url": "https://github.com/nitaynewman/python-projects/tree/main/TKinter/quizzler",
                 "video": "video/gui/Quizzler.mp4",
-                "paragraph": "This GUI project is a (questioner) witch has a few random questions from a api data base. you get 10 q you can answer and it gives you your score in the end."
+                "paragraph": "This GUI project is a questioner witch has a few random questions from a api data base. you get 10 q you can answer and it gives you your score in the end."
             },
             {
                 "id": 4,
@@ -204,7 +204,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/popcorn",
                 "video": "video/js/popcorentime.mp4",
                 "url": "/projects/popcoren-time",
-                "paragraph": "bla bla bla"
+                "paragraph": "In this React project I created a popcoren-time look a like website. I made this website so that I'll have a website to add my movies in the future so that ill have my own movie website."
             },
             {
                 "id": 2,
@@ -212,7 +212,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/todolist",
                 "video": "video/js/packing-agent.mp4",
                 "url": "/projects/packing-agent",
-                "paragraph": "bla bla bla"
+                "paragraph": "I have a problem remembering things that is why i created multiple to do lists, for example this is a website I created a to-do list before trips where I can add, delete, edit and check-off items on the website so that I never forget. Enjoy browsing through it."
             },
             {
                 "id": 3,
@@ -240,7 +240,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/guessNum",
                 "video": "video/js/guess-num.mp4",
                 "url": "/projects/guess-num",
-                "paragraph": "bla bla bla"
+                "paragraph": "In this js project i created a guess the number game. every time you play there is a secret number between 1 and 20 hiden and every time you guess your score lowers by one and it displays you a message hier or lower or if you guessed the correct number then it changes the css to green and you can play again by pressing the AGAIN button. enjoy playing."
             },
             {
                 "id": 2,
@@ -248,7 +248,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/pigGame",
                 "video": "video/js/pig-game.mp4",
                 "url": "/projects/pig-game",
-                "paragraph": "bla bla bla"
+                "paragraph": "In this game I created a 2 player game where 2 players are tring to reach 100 points. you start by rolling the dice if you get 1 the user changes, numbers between 2 and 6 you add to your count but only after you press on the hold button it permenntly saves your count. enjoy playing."
             }
         ]
     }
