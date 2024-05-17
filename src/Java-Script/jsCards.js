@@ -41,7 +41,7 @@ export default function Accordion({ data }) {
             <div className="card">
                 <div className='card-container'>
                     <div className="sides slide">
-                        <p>{el.paragraph}</p>
+                        <p style={{fontSize: '15px'}}>{el.paragraph}</p>
                         <button>
                           <a className='LINK' href={`${el.git_url}`} target="_blank" rel="noopener noreferrer">GitHub-Code</a>
                         </button>

@@ -26,8 +26,12 @@ export default function JsCards() {
                         // date='2000-2014'
                         // icon={ }
                     >
-                        <h3>{project.title}</h3>
-                        <p>{project.paragraph}</p>
+                        <h3 style={{
+                              fontSize:'3rem'
+                        }}>{project.title}</h3>
+                        <p style={{
+                              fontSize:'16px'
+                        }}>{project.paragraph}</p>
                         <button className='BTNN '>
                             <a className='LINK' href={`${project.git_url}`} target="_blank" rel="noopener noreferrer">GitHub Code</a>
                         </button>

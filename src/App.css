@@ -285,7 +285,7 @@ color: #00abf0;
   position: absolute;
   top: 0;
   right: 30px;
-  width: 500px;
+  width: 39%;
   height: 100%;
   background: transparent;
   transition: 3s;
@@ -498,7 +498,7 @@ color: #00abf0;
   width: 100%;
   font-weight: 600;
   letter-spacing: 2px;
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .card button {

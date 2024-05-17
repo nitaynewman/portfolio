@@ -59,7 +59,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div style={{display:"flex", justifyContent:"center"}}>
+    <div style={{display:"flex", justifyContent:"center", minHeight: '100vh'}}>
       <Navbar />
       <section className="contact">
           <h2>Contact Me!</h2>
