@@ -9,9 +9,8 @@
     width: 600px;
     text-align: center;
     box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    
+    min-height: 80vh;
     background: #081b29;
 
 }

@@ -13,15 +13,15 @@ const About = React.forwardRef((props, ref) => (
     <h2 style={{
       marginTop: '20%',
       textAlign: 'center',
-      fontSize: '30px'
+      fontSize: '50px'
     }}>
       Work Experience:
     </h2>
 
     <p style={{
-      fontSize: '15px',
+      fontSize: '20px',
       marginTop: '8%',
-      paddingBottom: '20%'
+      paddingBottom: '10%'
     }}>
       In the Idf I learned Web Development and after I got proficient in python for backend Development and html, css, JavaScript for frontend Development i started experimenting with React and with time became proficient in that as well. <br />
       This gave me a lot of experience learning code and working with multiple technologies such as SQL, Elatic, mongo, Openshift - doker and more. <br />
