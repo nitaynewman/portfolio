@@ -1,5 +1,21 @@
 {
     "Python_Projects": {
+        "AI": [
+            {
+                "id": "1",
+                "title": "AI Asistent",
+                "git_url": "https://github.com/nitaynewman/python-projects/blob/main/AI/AIasistent.py",
+                "video": "video/ai/AIAsistent.mp4",
+                "paragraph": "In this project I created an AI Asistent witch you can talk to it and it answoers in text in the console and in audio it runs localy on your machine in the README file there are instructions on how to install your own LLM from ollama."
+            },
+            {
+                "id": "2",
+                "title": "AI Chat-Bot",
+                "git_url": "https://github.com/nitaynewman/python-projects/blob/main/AI/ChatBot.py",
+                "video": "video/ai/AIChatBot.mp4",
+                "paragraph": "In this project I created an AI Chat-Bot it runs localy on your machine in the README file there are instructions on how to install your own LLM from ollama."
+            }
+        ],
         "API": [
             {
                 "id": "1",
@@ -28,8 +44,8 @@
                 "id": 1,
                 "title": "WhatsApp Sender",
                 "git_url": "",
-                "video": "video/automations/birthday.mp4",
-                "paragraph": "This automation library helped me in a lot of diffrent projects because i like to see all my notifications in my whatsapp. this uses selenium and you can send messages gifs images and vedeos"
+                "video": "video/automations/whatsappSender.mp4",
+                "paragraph": "This automation library helped me in a lot of diffrent projects because I like to see all my notifications in my whatsapp. this uses selenium and you can send messages gifs images and vedeos. It opens whatsappweb using your data and saves your data after conecting the first time and using the elements to enter and send your data through the app"
             },
             {
                 "id": 2,
@@ -154,7 +170,7 @@
                 "title": "Flash Cards",
                 "git_url": "https://github.com/nitaynewman/python-projects/tree/main/TKinter/Flash_Card",
                 "video": "video/gui/FlashCard.mp4",
-                "paragraph": "I dont know about you but i have a problam with remambering stuf before a test, so in this project i disided to help myself to fix the problam. I created a flash card gui so that before a test I can go through q&a's. for this I used hebrew words to study for the psichometry."
+                "paragraph": "I dont know about you but I have a problam with remambering stuf before a test, so in this project I disided to help myself to fix the problam. I created a flash card gui so that before a test I can go through q&a's. for this I used hebrew words to study for the psichometry."
             },
             {
                 "id": 2,
@@ -206,7 +222,7 @@
                 "git_url": "https://github.com/nitaynewman/python-projects/tree/main/Turtle/snake",
                 "video": "video/game/snake.mp4",
                 "url": "",
-                "paragraph": "This is a classic game i dont think I coldnt add this fun game. Hope you enjoy."
+                "paragraph": "This is a classic game I dont think I coldnt add this fun game. Hope you enjoy."
             }
         ]
     },
@@ -226,7 +242,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/todolist",
                 "video": "video/js/packing-agent.mp4",
                 "url": "/projects/packing-agent",
-                "paragraph": "I have a problem remembering things that is why i created multiple to do lists, for example this is a website I created a to-do list before trips where I can add, delete, edit and check-off items on the website so that I never forget. Enjoy browsing through it."
+                "paragraph": "I have a problem remembering things that is why I created multiple to do lists, for example this is a website I created a to-do list before trips where I can add, delete, edit and check-off items on the website so that I never forget. Enjoy browsing through it."
             },
             {
                 "id": 3,
@@ -254,7 +270,7 @@
                 "git_url": "https://github.com/nitaynewman/portfolio/tree/main/src/projects/guessNum",
                 "video": "video/js/guess-num.mp4",
                 "url": "/projects/guess-num",
-                "paragraph": "In this js project i created a guess the number game. every time you play there is a secret number between 1 and 20 hiden and every time you guess your score lowers by one and it displays you a message hier or lower or if you guessed the correct number then it changes the css to green and you can play again by pressing the AGAIN button. enjoy playing."
+                "paragraph": "In this js project I created a guess the number game. every time you play there is a secret number between 1 and 20 hiden and every time you guess your score lowers by one and it displays you a message hier or lower or if you guessed the correct number then it changes the css to green and you can play again by pressing the AGAIN button. enjoy playing."
             },
             {
                 "id": 2,
