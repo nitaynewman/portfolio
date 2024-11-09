@@ -43,7 +43,7 @@
             {
                 "id": 1,
                 "title": "WhatsApp Sender",
-                "git_url": "",
+                "git_url": "https://github.com/nitaynewman/python-projects/tree/main/automations/whatsapp_sender",
                 "video": "video/automations/whatsappSender.mp4",
                 "paragraph": "This automation library helped me in a lot of diffrent projects because I like to see all my notifications in my whatsapp. this uses selenium and you can send messages gifs images and vedeos. It opens whatsappweb using your data and saves your data after conecting the first time and using the elements to enter and send your data through the app"
             },

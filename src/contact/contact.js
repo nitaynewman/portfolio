@@ -10,6 +10,8 @@ const ContactForm = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const form = useRef();
+  const backEnd = process.env.REACT_APP_BACKEND_URL;
+  
 
   const sendEmail = (fullName, email, phone, subject, msg) => {
     // Start the loading timer
@@ -30,8 +32,7 @@ const ContactForm = () => {
       },
     });
 
-    // Send the PUT request to the backend
-    fetch('https://portfolio-be-2.onrender.com/email/', {
+    fetch(`${backEnd}/email/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
