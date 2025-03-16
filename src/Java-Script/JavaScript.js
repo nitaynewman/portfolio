@@ -1,6 +1,7 @@
 import Section from '../Section.js'
 import Accordion from './jsCards.js'
 import Js_Projects from '../all_projects.json'
+import Footer from '../footer.js'
 
 
 export default function JavaScript() {
@@ -19,6 +20,7 @@ export default function JavaScript() {
       <div className='js'>
       <Section Strings={JsString} Title={JsTitle} Paragraph={JsP} />
       <Accordion data={Js_Projects.Js_Projects.Js_App} />
+      <Footer />
       </div>
     )
     

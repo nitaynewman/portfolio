@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import './contact.css';
 import Swal from 'sweetalert2';
 import Navbar from '../navbar';
+import Footer from '../footer';
 
 const ContactForm = () => {
   const [fullName, setFullName] = useState('');
@@ -18,21 +19,19 @@ const ContactForm = () => {
     let timerInterval;
     Swal.fire({
       title: "Sending your message...",
-      html: "Please wait, we are sending your message. <b></b> milliseconds.",
+      html: "Please wait, we are sending your message.",
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();
-        const timer = Swal.getHtmlContainer().querySelector("b");
-        timerInterval = setInterval(() => {
-          timer.textContent = `${Swal.getTimerLeft()}`;
-        }, 100);
+        
+    
       },
       willClose: () => {
         clearInterval(timerInterval);
       },
     });
 
-    fetch(`${backEnd}/email/`, {
+    fetch(`${backEnd}/portfolio/email_sender`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +46,7 @@ const ContactForm = () => {
     })
     .then(response => response.json())
     .then(result => {
-      Swal.close();  // Close the loading timer
+      Swal.close();  
       if (result.success) {
         Swal.fire({
           title: "Success!",
@@ -95,6 +94,7 @@ const ContactForm = () => {
 
 
   return (
+    <>
     <div style={{ display: "flex", justifyContent: "center", minHeight: '100vh' }}>
       <Navbar />
       <section className="contact">
@@ -169,6 +169,8 @@ const ContactForm = () => {
         </form>
       </section>
     </div>
+      <Footer />
+      </>
   );
 };
 

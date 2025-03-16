@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import './slick.css';
 import './slick-theme.css';
@@ -6,6 +6,7 @@ import './python.css';
 import '../App.css';
 import ReactPlayer from 'react-player';
 import { ArrowBackIosRounded, ArrowForwardIosRounded } from '@mui/icons-material';
+import Spinner from "../components/Spinner";
 
 function Arrow(props) {
     const { className, style, onClick, type } = props;
@@ -34,8 +35,13 @@ function Arrow(props) {
 }
 
 function Carousel({ data, title }) {
+    const [initialized, setInitialized] = useState({}); // Tracks initialization state for each video
+
+    const handleReady = (id) => {
+        setInitialized((prev) => ({ ...prev, [id]: true })); // Mark the video as initialized
+    };
+
     if (!data || data.length === 0) {
-        // Handle the case where data is undefined or empty
         return <div>No data available</div>;
     }
 
@@ -91,6 +97,8 @@ function Carousel({ data, title }) {
                                     <button onClick={() => window.open(item.git_url, '_blank')}>Download</button>
                                 </div>
                                 <div className="sides video-container">
+                                    {/* Show spinner until video initializes */}
+                                    {!initialized[item.id] && <Spinner />}
                                     <ReactPlayer 
                                         className='video'
                                         url={item.video}
@@ -98,6 +106,7 @@ function Carousel({ data, title }) {
                                         loop={true}
                                         playing={true}
                                         muted={true}
+                                        onReady={() => handleReady(item.id)} // Mark video as initialized
                                     />
                                 </div>
                             </div>

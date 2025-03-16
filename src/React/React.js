@@ -1,5 +1,6 @@
 import Section from '../Section.js'
 import React_Projects from '../all_projects.json'
+import Footer from '../footer.js'
 import Accordion from './ReactCard.js'
 
 export default function ReactPage() {
@@ -14,6 +15,7 @@ export default function ReactPage() {
       <div className='react'>
         <Section Strings={RString} Title={RTitle} Paragraph={ReP} />
         <Accordion data={React_Projects.React_Projects.React_Apps} />
+        <Footer />
       </div>
     )
 }
