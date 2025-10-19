@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Section from '../Section.js';
-import About from '../About.js';
+import About from './About.js';
 import { useLocation } from 'react-router-dom';
 import Footer from '../footer.js';
 

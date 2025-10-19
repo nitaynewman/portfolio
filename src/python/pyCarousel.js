@@ -34,11 +34,11 @@ function Arrow(props) {
     );
 }
 
-function Carousel({ data, title }) {
-    const [initialized, setInitialized] = useState({}); // Tracks initialization state for each video
+function Carousel({ data, title, apiBaseUrl = 'http://localhost:8000' }) {
+    const [initialized, setInitialized] = useState({});
 
     const handleReady = (id) => {
-        setInitialized((prev) => ({ ...prev, [id]: true })); // Mark the video as initialized
+        setInitialized((prev) => ({ ...prev, [id]: true }));
     };
 
     if (!data || data.length === 0) {
@@ -52,8 +52,8 @@ function Carousel({ data, title }) {
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
-        nextArrow: <Arrow type="next" />,  // Custom next arrow
-        prevArrow: <Arrow type="prev" />,  // Custom prev arrow
+        nextArrow: <Arrow type="next" />,
+        prevArrow: <Arrow type="prev" />,
         responsive: [
             {
                 breakpoint: 1024,
@@ -86,33 +86,74 @@ function Carousel({ data, title }) {
         <div className="container">
             <h2 style={{ fontSize: "40px" }}>{title}</h2>
             <Slider {...settings}>
-                {data.map((item) => (
-                    <div key={item.id} className="card">
-                        <div className="card-body">
-                            <h3>{item.title}</h3>
-                            <div className="card-container">
-                                <div className="sides">
-                                    <p>{item.paragraph}</p>
-                                    <button onClick={() => window.open(item.git_url, '_blank')} className='LINK'>GitHub-Code</button>
-                                    <button onClick={() => window.open(item.git_url, '_blank')}>Download</button>
-                                </div>
-                                <div className="sides video-container">
-                                    {/* Show spinner until video initializes */}
-                                    {!initialized[item.id] && <Spinner />}
-                                    <ReactPlayer 
-                                        className='video'
-                                        url={item.video}
-                                        controls={false}
-                                        loop={true}
-                                        playing={true}
-                                        muted={true}
-                                        onReady={() => handleReady(item.id)} // Mark video as initialized
-                                    />
+                {data.map((item) => {
+                    // Construct full video URL from backend
+                    const videoUrl = item.video 
+                        ? `${apiBaseUrl}/data/${item.video}`
+                        : '';
+
+                    return (
+                        <div key={item.id} className="card">
+                            <div className="card-body">
+                                <h3>{item.title}</h3>
+                                <div className="card-container">
+                                    <div className="sides">
+                                        <p>{item.paragraph}</p>
+                                        {item.git_url && (
+                                            <>
+                                                <button 
+                                                    onClick={() => window.open(item.git_url, '_blank')} 
+                                                    className='LINK'
+                                                >
+                                                    GitHub-Code
+                                                </button>
+                                                <button 
+                                                    onClick={() => window.open(item.git_url, '_blank')}
+                                                >
+                                                    Download
+                                                </button>
+                                            </>
+                                        )}
+                                        {item.url && (
+                                            <button 
+                                                onClick={() => window.open(item.url, '_blank')}
+                                            >
+                                                View Project
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="sides video-container">
+                                        {videoUrl ? (
+                                            <>
+                                                {!initialized[item.id] && <Spinner />}
+                                                <ReactPlayer 
+                                                    className='video'
+                                                    url={videoUrl}
+                                                    controls={false}
+                                                    loop={true}
+                                                    playing={true}
+                                                    muted={true}
+                                                    onReady={() => handleReady(item.id)}
+                                                />
+                                            </>
+                                        ) : (
+                                            <div style={{ 
+                                                width: '100%', 
+                                                height: '100%', 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                justifyContent: 'center',
+                                                background: '#f0f0f0'
+                                            }}>
+                                                <p>No video available</p>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </Slider>
         </div>
     );

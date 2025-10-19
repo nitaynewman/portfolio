@@ -1,6 +1,47 @@
-
+/* Updated .card-container to center the video */
 .card-container {
-    margin-left: 5%;
-    
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Changed from center to space-between */
+  align-items: flex-start; /* Added to align items to top */
+  flex-wrap: wrap;
+  margin-left: 0; /* Changed from 5% to 0 */
+  padding: 0 3%; /* Added padding for spacing instead */
+  gap: 20px; /* Added gap between left and right sides */
 }
 
+.sides {
+  position: relative;
+  flex: 1;
+  min-width: 300px; /* Added minimum width for better responsiveness */
+}
+
+/* Ensure the video container is properly sized and centered */
+.card .video-container {
+  margin: 50px 0 0 0; /* Changed from 50px 30px 0px 0px */
+  z-index: 99;
+  color: black;
+  width: 100%;
+  max-width: 60%; /* Changed from width: 60% to max-width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .video-container .video {
+  height: 250px;
+  width: 100%;
+}
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 900px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card .video-container {
+    max-width: 100%;
+    margin: 20px 0;
+  }
+}

@@ -11,7 +11,7 @@ const Footer = () => {
             <h2>About Me</h2>
             <Link to='/#resume'><span className="bx bx-notepad" />  My Resume</Link> 
             {/* Add the download link for CV */}
-            <a href="/Nitay_Newman_2024_cv.pdf" download="Nitay_Newman_2024_cv.pdf"><span className='bx bxs-download' />  Download CV</a>
+            <a href="/Resume-2025-NitayNewman.pdf" download="Resume-2025-NitayNewman.pdf"><span className='bx bxs-download' />  Download CV</a>
           </div>
           <div className="footer_link--items">
             <h2>Contact Me</h2>

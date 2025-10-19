@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 .js {
   background-color: #081b29;
 }
@@ -46,13 +47,12 @@
 }
 
 .content-box {
-  /* grid-column: 2 / -1; */
+  grid-column: 1 / -1; /* Changed to span full width */
   padding-bottom: 0px;
   line-height: 1.6;
 }
 
 .content-box ul {
-  /* color: #868e96; */
   margin-left: 16px;
   margin-top: 16px;
   display: flex;
@@ -71,6 +71,52 @@
   color: #00abf0;
   border-bottom: 2px solid #063d65;
 }
+
+/* Fixed card container for accordion */
+.accordion .card-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Changed to space-between */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 0; /* Removed any margin */
+  padding: 20px 0; /* Added vertical padding */
+  gap: 20px; /* Added gap between sections */
+}
+
 .slide {
-  min-width: 20%;
+  min-width: 35%; /* Increased from 20% */
+  flex: 1;
+}
+
+/* Video container styling for accordion */
+.accordion .video-container {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important; /* Override any inherited margins */
+}
+
+.accordion .video-container .video {
+  height: 250px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Media query for responsive design */
+@media screen and (max-width: 900px) {
+  .accordion .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .slide {
+    min-width: 100%;
+  }
+  
+  .accordion .video-container {
+    min-width: 100%;
+  }
 }
