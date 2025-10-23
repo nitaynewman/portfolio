@@ -71,10 +71,10 @@ export default function Accordion({ data, apiBaseUrl = 'http://localhost:8000' }
                                     )}
                                     
                                     {el.url && (
-                                        <button>
-                                            <Link to={el.url} className="LINK">
+                                        <button className='BTNN'>
+                                            <a href={el.url} className="LINK">
                                                 Go To
-                                            </Link>
+                                            </a>
                                         </button>
                                     )}
                                 </div>
