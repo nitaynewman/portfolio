@@ -3,7 +3,7 @@ import Section from '../Section.js';
 import Accordion from './jsCards.js';
 import Footer from '../footer.js';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JavaScript() {
     const [jsProjects, setJsProjects] = useState([]);

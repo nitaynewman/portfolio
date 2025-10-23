@@ -5,7 +5,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function ReactCard({ data, apiBaseUrl = 'http://localhost:8080' }) {
+export default function ReactCard({ data, apiBaseUrl = process.env.REACT_APP_BACKEND_URL }) {
     // Check if data contains the required data
     if (!data || !Array.isArray(data) || data.length === 0) {
         console.error("React Data is missing or incorrect:", data);

@@ -4,7 +4,7 @@ import Footer from '../footer.js';
 import Carousel from './pyCarousel.js';
 
 // Configuration for API
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function Python() {
     const [pythonProjects, setPythonProjects] = useState(null);
