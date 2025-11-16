@@ -42,6 +42,7 @@ const About = ({ id }) => {
               <span className="skill-tag">HTML/CSS</span>
               <span className="skill-tag">Tailwind CSS</span>
               <span className="skill-tag">React</span>
+              <span className="skill-tag">JavaScript</span>
             </div>
           </div>
           <div className="skill-card">
@@ -52,7 +53,6 @@ const About = ({ id }) => {
               <span className="skill-tag">Flask</span>
               <span className="skill-tag">RESTful APIs</span>
               <span className="skill-tag">FastApi APIs</span>
-              <span className="skill-tag">Flask</span>
             </div>
           </div>
           <div className="skill-card">
@@ -75,6 +75,8 @@ const About = ({ id }) => {
               <span className="skill-tag">Openshift</span>
               <span className="skill-tag">Amazon S3</span>
               <span className="skill-tag">Git</span>
+              <span className="skill-tag">Supabase</span>
+              <span className="skill-tag">Firebase</span>
             </div>
           </div>
           <div className="skill-card">
@@ -97,21 +99,6 @@ const About = ({ id }) => {
             <div className="timeline-content">
               <div className="timeline-header">
                 <h3>Full Stack Developer</h3>
-                <span className="timeline-date">May 2025 – Present</span>
-              </div>
-              <h4 className="company-name">Mothershipcorp - Remote</h4>
-              <ul className="experience-list">
-                <li>Worked on full-stack development of scalable web applications using React, TypeScript, and Flask in a microservices-based architecture.</li>
-                <li>Utilized PostgreSQL for relational data modeling and querying and implemented Amazon S3 for scalable and secure file storage.</li>
-                <li>Developed and integrated RESTful APIs, including secure authentication, data validation, and inter-service communication.</li>
-              </ul>
-            </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-marker"></div>
-            <div className="timeline-content">
-              <div className="timeline-header">
-                <h3>Full Stack Developer</h3>
                 <span className="timeline-date">Feb 2022 – Oct 2024</span>
               </div>
               <h4 className="company-name">IDF, 8200 Unit</h4>
@@ -124,6 +111,21 @@ const About = ({ id }) => {
             </div>
           </div>
         </div>
+          <div className="timeline-item">
+            <div className="timeline-marker"></div>
+            <div className="timeline-content">
+              <div className="timeline-header">
+                <h3>Full Stack Developer</h3>
+                <span className="timeline-date">May 2025 – Present</span>
+              </div>
+              <h4 className="company-name">Mothershipcorp - Remote</h4>
+              <ul className="experience-list">
+                <li>Worked on full-stack development of scalable web applications using React, TypeScript, and Flask in a microservices-based architecture.</li>
+                <li>Utilized PostgreSQL for relational data modeling and querying and implemented Amazon S3 for scalable and secure file storage.</li>
+                <li>Developed and integrated RESTful APIs, including secure authentication, data validation, and inter-service communication.</li>
+              </ul>
+            </div>
+          </div>
       </section>
 
       {/* Education Section */}

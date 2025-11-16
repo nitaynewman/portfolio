@@ -34,7 +34,7 @@ function Arrow(props) {
     );
 }
 
-function Carousel({ data, title, apiBaseUrl = 'http://localhost:8000' }) {
+function Carousel({ data, title, apiBaseUrl = process.env.REACT_APP_BACKEND_URL }) {
     const [initialized, setInitialized] = useState({});
 
     const handleReady = (id) => {
@@ -87,10 +87,8 @@ function Carousel({ data, title, apiBaseUrl = 'http://localhost:8000' }) {
             <h2 style={{ fontSize: "40px" }}>{title}</h2>
             <Slider {...settings}>
                 {data.map((item) => {
-                    // Construct full video URL from backend
-                    const videoUrl = item.video 
-                        ? `${apiBaseUrl}/data/${item.video}`
-                        : '';
+                    // Video URL comes directly from Supabase - use as-is
+                    const videoUrl = item.video || '';
 
                     return (
                         <div key={item.id} className="card">
@@ -108,19 +106,13 @@ function Carousel({ data, title, apiBaseUrl = 'http://localhost:8000' }) {
                                                     GitHub-Code
                                                 </button>
                                                 <button 
-                                                    onClick={() => window.open(item.git_url, '_blank')}
+                                                    onClick={item.url ? () => window.open(item.url, '_blank') : () => window.open(item.git_url, '_blank')}
                                                 >
                                                     Download
                                                 </button>
                                             </>
                                         )}
-                                        {item.url && (
-                                            <button 
-                                                onClick={() => window.open(item.url, '_blank')}
-                                            >
-                                                View Project
-                                            </button>
-                                        )}
+                                        
                                     </div>
                                     <div className="sides video-container">
                                         {videoUrl ? (

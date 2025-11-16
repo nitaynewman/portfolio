@@ -20,10 +20,8 @@ export default function ReactCard({ data, apiBaseUrl = process.env.REACT_APP_BAC
         <div>
             <VerticalTimeline lineColor='#00abf0'>
                 {data.map(project => {
-                    // Construct full video URL from backend
-                    const videoUrl = project.video 
-                        ? `${apiBaseUrl}/data/${project.video}`
-                        : '';
+                    // Video URL comes directly from Supabase - use as-is
+                    const videoUrl = project.video || '';
 
                     return (
                         <VerticalTimelineElement

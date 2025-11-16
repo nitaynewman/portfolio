@@ -21,12 +21,10 @@ function AccordionItems({ num, title, children, curOpen, onOpen }) {
     );
 }
 
-export default function Accordion({ data, apiBaseUrl = 'http://localhost:8000' }) {
+export default function Accordion({ data, apiBaseUrl }) {
     const [curOpen, setCurOpen] = useState(null);
 
-    // Check if data contains the required array
     if (!data || !Array.isArray(data) || data.length === 0) {
-        console.error("Data is missing or incorrect:", data);
         return (
             <div style={{ textAlign: 'center', padding: '50px' }}>
                 <p>No JavaScript projects available.</p>
@@ -37,10 +35,8 @@ export default function Accordion({ data, apiBaseUrl = 'http://localhost:8000' }
     return (
         <div className="accordion">
             {data.map((el, i) => {
-                // Construct full video URL from backend
-                const videoUrl = el.video 
-                    ? `${apiBaseUrl}/data/${el.video}`
-                    : '';
+                // Video URL comes directly from Supabase - use as-is
+                const videoUrl = el.video || '';
 
                 return (
                     <AccordionItems
