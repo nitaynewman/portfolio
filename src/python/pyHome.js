@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Section from "../Section.js";
 import Footer from "../footer.js";
 import Carousel from "./pyCarousel.js";
@@ -13,8 +13,18 @@ export default function Python() {
   const [allCategories, setAllCategories] = useState([]);
   const [initialLoading, setInitialLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [visibleCategories, setVisibleCategories] = useState(new Set());
 
-  const PYstring = ["API", "Automations and Selenium", "Basics"];
+  const categoryRefs = useRef({});
+
+  const PYstring = [
+    "API",
+    "Automations and Selenium",
+    "Microservices",
+    "AI Integration",
+    "FastApi and Flask",
+    "SQL, Postgres, Elastic, MongoDB, S3 Integration",
+  ];
   const PyP =
     "Here you can see all my journey in Python. This includes API calls, automations, backend projects, Games, GUI apps, and more.";
   const PyTitle = "My Python Journey";
@@ -31,16 +41,53 @@ export default function Python() {
     "Microservices",
   ];
 
+  // Intersection Observer to detect visible categories
   useEffect(() => {
-    // Start loading categories one by one
-    loadCategoriesSequentially();
+    const observerOptions = {
+      root: null,
+      rootMargin: "200px", // Start loading 200px before element comes into view
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const category = entry.target.dataset.category;
+          setVisibleCategories((prev) => new Set([...prev, category]));
+        }
+      });
+    }, observerOptions);
+
+    // Observe all category placeholders
+    Object.values(categoryRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [allCategories]);
+
+  useEffect(() => {
+    // Load first 2 categories immediately, rest when visible
+    loadInitialCategories();
   }, []);
 
-  const loadCategoriesSequentially = async () => {
+  // Load visible categories when they come into view
+  useEffect(() => {
+    visibleCategories.forEach((category) => {
+      if (!pythonProjects[category] && !loadingCategories.includes(category)) {
+        fetchCategoryProjects(category);
+      }
+    });
+  }, [visibleCategories]);
+
+  const loadInitialCategories = async () => {
+    // Add all categories to the list immediately (for placeholders)
+    setAllCategories(categoryOrder);
     setInitialLoading(false);
 
-    // Load categories one at a time
-    for (const category of categoryOrder) {
+    // Load first 2 categories immediately (above the fold)
+    const initialCategories = categoryOrder.slice(0, 2);
+    for (const category of initialCategories) {
       await fetchCategoryProjects(category);
     }
   };
@@ -63,15 +110,12 @@ export default function Python() {
         [category]: data[category] || [],
       }));
 
-      // Add to loaded categories list
-      setAllCategories((prev) => [...prev, category]);
-
       // Remove from loading state
       setLoadingCategories((prev) => prev.filter((cat) => cat !== category));
     } catch (err) {
       console.error(`Error fetching ${category} projects:`, err);
-      // Remove from loading state even on error
       setLoadingCategories((prev) => prev.filter((cat) => cat !== category));
+      setError(`Failed to load ${category} projects. Please try again.`);
     }
   };
 
@@ -88,60 +132,79 @@ export default function Python() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="python">
-        <Section Strings={PYstring} Title={PyTitle} Paragraph={PyP} />
-        <div style={{ textAlign: "center", padding: "50px", color: "red" }}>
-          <h3>{error}</h3>
-          <button onClick={loadCategoriesSequentially}>Retry</button>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="python">
       <Section Strings={PYstring} Title={PyTitle} Paragraph={PyP} />
 
-      {/* Render loaded categories in order */}
+      {error && (
+        <div
+          style={{
+            textAlign: "center",
+            padding: "20px",
+            color: "#ff6b6b",
+            background: "rgba(255, 107, 107, 0.1)",
+            border: "2px solid #ff6b6b",
+            margin: "20px auto",
+            borderRadius: "8px",
+            maxWidth: "600px",
+          }}
+        >
+          <p>{error}</p>
+        </div>
+      )}
+
+      {/* Render categories in order */}
       {categoryOrder.map((category) => {
-        // If category is loaded, show the carousel
-        if (
-          allCategories.includes(category) &&
-          pythonProjects[category]?.length > 0
-        ) {
-          return (
-            <Carousel
-              key={category}
-              data={pythonProjects[category]}
-              title={category}
-              apiBaseUrl={API_BASE_URL}
-            />
-          );
-        }
+        const isLoaded = pythonProjects[category]?.length > 0;
+        const isLoading = loadingCategories.includes(category);
 
-        // If category is currently loading, show spinner
-        if (loadingCategories.includes(category)) {
-          return (
-            <div
-              key={category}
-              style={{ textAlign: "center", padding: "50px" }}
-            >
-              <h2 style={{ fontSize: "40px", marginBottom: "30px" }}>
-                {category}
-              </h2>
-              <Spinner />
-              <p style={{ marginTop: "20px", color: "#666" }}>
-                Loading {category} projects...
-              </p>
-            </div>
-          );
-        }
-
-        // Don't render anything for categories not yet started
-        return null;
+        return (
+          <div
+            key={category}
+            ref={(el) => (categoryRefs.current[category] = el)}
+            data-category={category}
+            style={{ minHeight: isLoaded ? "auto" : "400px" }}
+          >
+            {isLoaded ? (
+              <Carousel
+                data={pythonProjects[category]}
+                title={category}
+                apiBaseUrl={API_BASE_URL}
+              />
+            ) : isLoading ? (
+              <div style={{ textAlign: "center", padding: "50px" }}>
+                <h2 style={{ fontSize: "40px", marginBottom: "30px" }}>
+                  {category}
+                </h2>
+                <Spinner />
+                <p style={{ marginTop: "20px", color: "#999" }}>
+                  Loading {category} projects...
+                </p>
+              </div>
+            ) : (
+              <div style={{ textAlign: "center", padding: "50px" }}>
+                <h2
+                  style={{
+                    fontSize: "40px",
+                    marginBottom: "30px",
+                    color: "#555",
+                  }}
+                >
+                  {category}
+                </h2>
+                <div
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    margin: "0 auto",
+                    border: "4px solid #063d65",
+                    borderRadius: "50%",
+                  }}
+                ></div>
+              </div>
+            )}
+          </div>
+        );
       })}
 
       <Footer />

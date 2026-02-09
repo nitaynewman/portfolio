@@ -30,7 +30,7 @@ export default function AdminAddProject() {
       "Games",
       "Other",
     ],
-    React_Projects: ["React_Apps"],
+    React_Projects: ["React_Apps", "React_Native_Apps"],
     Js_Projects: ["Js_App"],
   };
 
@@ -72,18 +72,21 @@ export default function AdminAddProject() {
         formDataToSend.append("video", formData.video);
       }
 
-      // Determine the actual category to send
-      const actualCategory =
-        formData.category === "Other"
-          ? formData.customCategory
-          : formData.category;
-
       // Determine the correct endpoint based on project type
       let endpoint = "";
+
       if (formData.project_type === "Python_Projects") {
+        const actualCategory =
+          formData.category === "Other"
+            ? formData.customCategory
+            : formData.category;
         endpoint = `${API_BASE_URL}/data/python/${actualCategory}`;
       } else if (formData.project_type === "React_Projects") {
-        endpoint = `${API_BASE_URL}/data/react`;
+        if (formData.category === "React_Apps") {
+          endpoint = `${API_BASE_URL}/data/react`;
+        } else if (formData.category === "React_Native_Apps") {
+          endpoint = `${API_BASE_URL}/data/react/native`;
+        }
       } else if (formData.project_type === "Js_Projects") {
         endpoint = `${API_BASE_URL}/data/js`;
       }
@@ -154,7 +157,9 @@ export default function AdminAddProject() {
           </select>
         </div>
 
-        {formData.project_type === "Python_Projects" && (
+        {/* Category selection for Python and React */}
+        {(formData.project_type === "Python_Projects" ||
+          formData.project_type === "React_Projects") && (
           <>
             <div className="form-group">
               <label htmlFor="category">Category *</label>
@@ -168,7 +173,7 @@ export default function AdminAddProject() {
                 <option value="">Select a category</option>
                 {projectCategories[formData.project_type].map((cat) => (
                   <option key={cat} value={cat}>
-                    {cat}
+                    {cat === "React_Native_Apps" ? "React Native Apps" : cat}
                   </option>
                 ))}
               </select>

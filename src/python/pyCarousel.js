@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "./slick.css";
 import "./slick-theme.css";
@@ -47,29 +47,58 @@ function Carousel({
   apiBaseUrl = process.env.REACT_APP_BACKEND_URL,
 }) {
   const [initialized, setInitialized] = useState({});
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loadedVideos, setLoadedVideos] = useState(new Set([0])); // Load first video immediately
+  const videoRefs = useRef({});
 
   const handleReady = (id) => {
     setInitialized((prev) => ({ ...prev, [id]: true }));
   };
 
+  // Load videos as user navigates
+  const handleSlideChange = (index) => {
+    setCurrentSlide(index);
+
+    // Load current, next, and previous videos
+    const videosToLoad = new Set(loadedVideos);
+    videosToLoad.add(index);
+    if (index > 0) videosToLoad.add(index - 1);
+    if (index < data.length - 1) videosToLoad.add(index + 1);
+
+    setLoadedVideos(videosToLoad);
+  };
+
+  // Preload adjacent videos after initial render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (data.length > 1) {
+        setLoadedVideos(new Set([0, 1]));
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [data.length]);
+
   // Add validation for data
   if (!data || !Array.isArray(data) || data.length === 0) {
-    return null; // Don't render anything if no valid data
+    return null;
   }
 
   const settings = {
     dots: true,
-    infinite: data.length > 1, // Only infinite if more than 1 slide
+    infinite: data.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
-    arrows: data.length > 1, // Only show arrows if more than 1 slide
+    arrows: data.length > 1,
     nextArrow: data.length > 1 ? <Arrow type="next" /> : <></>,
     prevArrow: data.length > 1 ? <Arrow type="prev" /> : <></>,
     adaptiveHeight: false,
     draggable: data.length > 1,
     swipe: data.length > 1,
+    beforeChange: (current, next) => handleSlideChange(next),
+    lazyLoad: "ondemand",
     responsive: [
       {
         breakpoint: 1024,
@@ -102,9 +131,9 @@ function Carousel({
     <div className="container">
       <h2 style={{ fontSize: "40px" }}>{title}</h2>
       <Slider {...settings}>
-        {data.map((item) => {
-          // Video URL comes directly from Supabase - use as-is
+        {data.map((item, index) => {
           const videoUrl = item.video || "";
+          const shouldLoadVideo = loadedVideos.has(index);
 
           return (
             <div key={item.id} className="card">
@@ -135,32 +164,69 @@ function Carousel({
                   </div>
                   <div className="sides video-container">
                     {videoUrl ? (
-                      <>
-                        {!initialized[item.id] && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              zIndex: 1,
+                      shouldLoadVideo ? (
+                        <>
+                          {!initialized[item.id] && (
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                zIndex: 1,
+                              }}
+                            >
+                              <Spinner />
+                            </div>
+                          )}
+                          <ReactPlayer
+                            ref={(el) => (videoRefs.current[index] = el)}
+                            className="video"
+                            url={videoUrl}
+                            controls={false}
+                            loop={true}
+                            playing={currentSlide === index}
+                            muted={true}
+                            onReady={() => handleReady(item.id)}
+                            width="100%"
+                            height="100%"
+                            config={{
+                              file: {
+                                attributes: {
+                                  preload: "metadata",
+                                },
+                              },
                             }}
-                          >
-                            <Spinner />
+                          />
+                        </>
+                      ) : (
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "250px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background:
+                              "linear-gradient(135deg, #063d65 0%, #00abf0 100%)",
+                            borderRadius: "8px",
+                            border: "2px solid #00abf0",
+                            color: "#ededed",
+                            fontSize: "14px",
+                          }}
+                        >
+                          <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{ fontSize: "40px", marginBottom: "10px" }}
+                            >
+                              ▶️
+                            </div>
+                            <p style={{ margin: 0, fontWeight: 500 }}>
+                              Video will load when viewed
+                            </p>
                           </div>
-                        )}
-                        <ReactPlayer
-                          className="video"
-                          url={videoUrl}
-                          controls={false}
-                          loop={true}
-                          playing={true}
-                          muted={true}
-                          onReady={() => handleReady(item.id)}
-                          width="100%"
-                          height="100%"
-                        />
-                      </>
+                        </div>
+                      )
                     ) : (
                       <div
                         style={{
@@ -169,7 +235,10 @@ function Carousel({
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          background: "#f0f0f0",
+                          background: "#0a2031",
+                          borderRadius: "8px",
+                          border: "2px dashed #063d65",
+                          color: "#999",
                         }}
                       >
                         <p>No video available</p>
