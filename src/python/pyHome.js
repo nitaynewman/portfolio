@@ -7,11 +7,31 @@ import Spinner from "../components/Spinner";
 // Configuration for API
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
+const PY_CACHE_KEY = 'cache_python_projects';
+const PY_CACHE_TTL = 10 * 60 * 1000;
+
+function getPyCache() {
+  try {
+    const item = localStorage.getItem(PY_CACHE_KEY);
+    if (!item) return null;
+    const { data, timestamp } = JSON.parse(item);
+    if (Date.now() - timestamp > PY_CACHE_TTL) return null;
+    return data;
+  } catch { return null; }
+}
+
+function setPyCache(data) {
+  try {
+    localStorage.setItem(PY_CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+  } catch {}
+}
+
 export default function Python() {
-  const [pythonProjects, setPythonProjects] = useState({});
+  const pyCache = getPyCache();
+  const [pythonProjects, setPythonProjects] = useState(pyCache || {});
   const [loadingCategories, setLoadingCategories] = useState([]);
-  const [allCategories, setAllCategories] = useState([]);
-  const [initialLoading, setInitialLoading] = useState(true);
+  const [allCategories, setAllCategories] = useState(pyCache ? Object.keys(pyCache) : []);
+  const [initialLoading, setInitialLoading] = useState(!pyCache);
   const [error, setError] = useState(null);
   const [visibleCategories, setVisibleCategories] = useState(new Set());
 
@@ -67,8 +87,7 @@ export default function Python() {
   }, [allCategories]);
 
   useEffect(() => {
-    // Load first 2 categories immediately, rest when visible
-    loadInitialCategories();
+    if (!getPyCache()) loadInitialCategories();
   }, []);
 
   // Load visible categories when they come into view
@@ -105,10 +124,11 @@ export default function Python() {
       const data = await response.json();
 
       // Add the loaded category data to state
-      setPythonProjects((prev) => ({
-        ...prev,
-        [category]: data[category] || [],
-      }));
+      setPythonProjects((prev) => {
+        const updated = { ...prev, [category]: data[category] || [] };
+        setPyCache(updated);
+        return updated;
+      });
 
       // Remove from loading state
       setLoadingCategories((prev) => prev.filter((cat) => cat !== category));

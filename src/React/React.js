@@ -5,10 +5,30 @@ import ReactCard from "./ReactCard.js";
 
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
+const CACHE_KEY = 'cache_react_projects';
+const CACHE_TTL = 10 * 60 * 1000;
+
+function getCached() {
+  try {
+    const item = localStorage.getItem(CACHE_KEY);
+    if (!item) return null;
+    const { data, timestamp } = JSON.parse(item);
+    if (Date.now() - timestamp > CACHE_TTL) return null;
+    return data;
+  } catch { return null; }
+}
+
+function setCache(data) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+  } catch {}
+}
+
 export default function ReactPage() {
-  const [reactProjects, setReactProjects] = useState([]);
-  const [reactNativeProjects, setReactNativeProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const cached = getCached();
+  const [reactProjects, setReactProjects] = useState(cached?.React_Apps || []);
+  const [reactNativeProjects, setReactNativeProjects] = useState(cached?.React_Native_Apps || []);
+  const [loading, setLoading] = useState(!cached);
   const [error, setError] = useState(null);
 
   const RString = [
@@ -22,7 +42,7 @@ export default function ReactPage() {
   const RTitle = "My React Journey";
 
   useEffect(() => {
-    fetchReactProjects();
+    if (!getCached()) fetchReactProjects();
   }, []);
 
   const fetchReactProjects = async () => {
@@ -37,6 +57,7 @@ export default function ReactPage() {
       const data = await response.json();
       setReactProjects(data.React_Apps || []);
       setReactNativeProjects(data.React_Native_Apps || []);
+      setCache(data);
       setError(null);
     } catch (err) {
       console.error("Error fetching React projects:", err);

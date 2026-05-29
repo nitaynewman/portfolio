@@ -562,6 +562,83 @@ color: #00abf0;
   text-decoration: none;
 }
 
+/* ── Home responsive ── */
+@media screen and (max-width: 768px) {
+  .home {
+    padding: 0 5%;
+    background-position: right center;
+  }
+
+  .home-content h1 {
+    font-size: 34px;
+  }
+
+  .home-content h3 {
+    font-size: 22px;
+  }
+
+  .home-content span {
+    font-size: 22px;
+  }
+
+  .home-content p {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  .home-content .btn-box {
+    width: 100%;
+    max-width: 345px;
+  }
+
+  .home-imgHover {
+    display: none;
+  }
+
+  .home-sci {
+    position: relative;
+    bottom: auto;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home {
+    padding: 0 4%;
+    align-items: flex-start;
+    padding-top: 100px;
+  }
+
+  .home-content h1 {
+    font-size: 26px;
+  }
+
+  .home-content h3,
+  .home-content span {
+    font-size: 18px;
+  }
+
+  .home-content p {
+    font-size: 14px;
+    margin: 15px 0 30px;
+  }
+
+  .home-content .btn-box {
+    width: 100%;
+    max-width: 280px;
+    height: 44px;
+  }
+
+  .btn-box .LInk {
+    font-size: 15px;
+    width: 130px;
+  }
+
+  .home-sci {
+    width: 140px;
+  }
+}
+
 /* scroll bar */
 ::-webkit-scrollbar{
   width: 12px;
