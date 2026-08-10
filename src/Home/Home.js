@@ -10,6 +10,8 @@ export default function Home() {
     'React Developer',
     'Python Developer',
     'Full Stack Developer',
+    'DevSecOps Engineer',
+    'Security Automation Engineer',
   ];
   let HomeP = 'In this website I put a compilation of all my coding projects and my learning journey. Hope you enjoy!';
   let HomeT = "Hi, I'm Nitay Newman";

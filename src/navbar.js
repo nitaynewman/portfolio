@@ -12,6 +12,7 @@ export default function Navbar() {
             <Link to="/Python">Python</Link>
             <Link to='/React'>React</Link>
             <Link to="/Js">Java-Script</Link>
+            <Link to="/Security">Security</Link>
             <Link to="/contact">Contact</Link>
       
           </nav>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css';
-import { FaCode, FaReact, FaCodepen, FaDatabase, FaCodeBranch, FaFileCode  } from "react-icons/fa";
+import { FaCode, FaReact, FaCodepen, FaDatabase, FaCodeBranch, FaFileCode, FaShieldAlt, FaNetworkWired, FaServer, FaLock, FaUserShield, FaKey } from "react-icons/fa";
 
 
 const About = ({ id }) => {
@@ -11,12 +11,12 @@ const About = ({ id }) => {
         <h2 className="section-title">Objective</h2>
         <div className="section-content">
           <p className="objective-text">
-            Experienced Full-Stack Developer with a track record of delivering high-quality software applications.
-            Skilled in front-end and back-end development, with a passion for creating responsive and user-friendly applications.
+            Full-stack developer with 3+ years of production experience, now building toward DevSecOps through a dedicated Secure Development course, hands-on infrastructure automation, and a 650-hour CCNA-level networking &amp; cybersecurity program.
+            Applies secure coding practices (OWASP-aligned) alongside containerised deployments (Docker, Kubernetes), cloud storage (AWS S3), and enterprise workflow automation (n8n).
           </p>
           <p className="objective-text">
-            Over 3 years of proven ability to collaborate with cross-functional teams to meet project goals and deadlines.
-            Dedicated and passionate developer with a strong work ethic, consistently delivering high-quality solutions.
+            Builds a bridge between development and security: comfortable writing production code and reasoning about how it can be attacked or hardened.
+            Track record of shipping secure, scalable systems end-to-end — from application code to the infrastructure and network it runs on.
           </p>
         </div>
       </section>
@@ -63,6 +63,7 @@ const About = ({ id }) => {
               <span className="skill-tag">PostgreSQL</span>
               <span className="skill-tag">MongoDB</span>
               <span className="skill-tag">Elasticsearch</span>
+              <span className="skill-tag">Neo4j</span>
               <span className="skill-tag">S3</span>
             </div>
           </div>
@@ -75,6 +76,7 @@ const About = ({ id }) => {
               <span className="skill-tag">Openshift</span>
               <span className="skill-tag">Amazon S3</span>
               <span className="skill-tag">Git</span>
+              <span className="skill-tag">n8n</span>
               <span className="skill-tag">Supabase</span>
               <span className="skill-tag">Firebase</span>
             </div>
@@ -85,6 +87,80 @@ const About = ({ id }) => {
             <div className="skill-tags">
               <span className="skill-tag">Microservices</span>
               <span className="skill-tag">REST APIs</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Security Skills Section */}
+      <section className="about-section skills-section">
+        <h2 className="section-title">Security Skills</h2>
+        <div className="skills-grid">
+          <div className="skill-card">
+            <div className="skill-icon"><FaLock /></div>
+            <h3>Secure Coding</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">OWASP Proactive Controls</span>
+              <span className="skill-tag">Input Validation</span>
+              <span className="skill-tag">Output Sanitization</span>
+              <span className="skill-tag">Secure Error Handling</span>
+              <span className="skill-tag">JWT / OAuth 2.0 / OIDC</span>
+            </div>
+          </div>
+          <div className="skill-card">
+            <div className="skill-icon"><FaKey /></div>
+            <h3>Cryptography</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">Symmetric Encryption</span>
+              <span className="skill-tag">Asymmetric Encryption</span>
+              <span className="skill-tag">Hashing</span>
+              <span className="skill-tag">PKI</span>
+              <span className="skill-tag">Data in Transit & at Rest</span>
+            </div>
+          </div>
+          <div className="skill-card">
+            <div className="skill-icon"><FaNetworkWired /></div>
+            <h3>Networking</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">CCNA-Level</span>
+              <span className="skill-tag">TCP/IP</span>
+              <span className="skill-tag">Network Segmentation</span>
+              <span className="skill-tag">ACLs & NAT</span>
+              <span className="skill-tag">VPN / IPsec</span>
+              <span className="skill-tag">Threat Management</span>
+            </div>
+          </div>
+          <div className="skill-card">
+            <div className="skill-icon"><FaServer /></div>
+            <h3>Systems</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">Linux Administration</span>
+              <span className="skill-tag">Windows Server</span>
+              <span className="skill-tag">Active Directory</span>
+              <span className="skill-tag">FortiGate NGFW</span>
+              <span className="skill-tag">Access Control</span>
+            </div>
+          </div>
+          <div className="skill-card">
+            <div className="skill-icon"><FaShieldAlt /></div>
+            <h3>DevSecOps</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">CI/CD Security</span>
+              <span className="skill-tag">Docker Hardening</span>
+              <span className="skill-tag">Kubernetes Security</span>
+              <span className="skill-tag">AWS S3 Access Control</span>
+              <span className="skill-tag">n8n Automation</span>
+            </div>
+          </div>
+          <div className="skill-card">
+            <div className="skill-icon"><FaUserShield /></div>
+            <h3>Identity & Access</h3>
+            <div className="skill-tags">
+              <span className="skill-tag">JWT</span>
+              <span className="skill-tag">OAuth 2.0</span>
+              <span className="skill-tag">OpenID Connect</span>
+              <span className="skill-tag">Role-Based Access</span>
+              <span className="skill-tag">Risk Management</span>
             </div>
           </div>
         </div>
@@ -110,7 +186,6 @@ const About = ({ id }) => {
               </ul>
             </div>
           </div>
-        </div>
           <div className="timeline-item">
             <div className="timeline-marker"></div>
             <div className="timeline-content">
@@ -120,12 +195,15 @@ const About = ({ id }) => {
               </div>
               <h4 className="company-name">Mothershipcorp - Remote</h4>
               <ul className="experience-list">
-                <li>Worked on full-stack development of scalable web applications using React, TypeScript, and Flask in a microservices-based architecture.</li>
-                <li>Utilized PostgreSQL for relational data modeling and querying and implemented Amazon S3 for scalable and secure file storage.</li>
-                <li>Developed and integrated RESTful APIs, including secure authentication, data validation, and inter-service communication.</li>
+                <li>Applied secure coding practices (OWASP-aligned) to full-stack development using React, TypeScript, and Flask in a microservices-based architecture.</li>
+                <li>Built enterprise-grade automation workflows in n8n to streamline DevOps and development processes across internal systems.</li>
+                <li>Designed and deployed Neo4j graph infrastructure to support AI-driven application features.</li>
+                <li>Implemented AWS S3 with secure, access-controlled configuration for file storage; used PostgreSQL for relational data modeling.</li>
+                <li>Developed and integrated RESTful APIs with an emphasis on secure authentication, input validation, and hardened inter-service communication.</li>
               </ul>
             </div>
           </div>
+        </div>
       </section>
 
       {/* Education Section */}
@@ -147,9 +225,26 @@ const About = ({ id }) => {
           </div>
           <div className="education-card">
             <div className="education-icon">🔒</div>
-            <h3>Course - Secure Development</h3>
+            <h3>Cyber Security Specialist – 650 Hours</h3>
+            <h4>ITQ IT Experts</h4>
+            <span className="education-date">Apr 2026 – Aug 2026 (in progress)</span>
+            <ul className="education-list">
+              <li>Cisco networking infrastructure & security hardening</li>
+              <li>Windows Server & Active Directory configuration</li>
+              <li>Linux Essentials & administration fundamentals</li>
+              <li>FortiGate NGFW deployment & configuration</li>
+            </ul>
+          </div>
+          <div className="education-card">
+            <div className="education-icon">🛡️</div>
+            <h3>Secure Development – 40 Hours</h3>
             <h4>John Bryce College, Tel Aviv</h4>
             <span className="education-date">Oct 2023 – Nov 2023</span>
+            <ul className="education-list">
+              <li>OWASP Proactive Controls & secure coding lifecycle</li>
+              <li>Cryptography: symmetric/asymmetric, hashing, PKI</li>
+              <li>Identity & access management: JWT, OAuth 2.0, OIDC</li>
+            </ul>
           </div>
         </div>
       </section>

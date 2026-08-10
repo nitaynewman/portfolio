@@ -7,6 +7,7 @@ const Python = lazy(() => import('./python/pyHome'));
 const JavaScript = lazy(() => import('./Java-Script/JavaScript'));
 const ReactPage = lazy(() => import('./React/React'));
 const Contact = lazy(() => import('./contact/contact'));
+const Security = lazy(() => import('./Security/Security'));
 const NotFound = lazy(() => import('./not_found'));
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path='/React'>
             <ReactPage />
+          </Route>
+          <Route exact path='/Security'>
+            <Security />
           </Route>
           <Route exact path='/contact'>
             <Contact />

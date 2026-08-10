@@ -1,0 +1,234 @@
+.security-projects {
+  padding: 20px 10% 80px;
+  background: #081b29;
+}
+
+.security-category {
+  margin-bottom: 80px;
+}
+
+.security-category-title {
+  font-size: 36px;
+  color: #00abf0;
+  margin-bottom: 30px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 171, 240, 0.3);
+  letter-spacing: 1px;
+}
+
+.security-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.security-card {
+  background: linear-gradient(145deg, #0a2137, #063d65);
+  border: 2px solid #00abf0;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.security-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 171, 240, 0.3);
+  border-color: #00d4ff;
+}
+
+.security-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.security-card-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #0d2d4a, #052d4a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+}
+
+.security-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.security-card-title {
+  color: #00abf0;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.security-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.security-card-tag {
+  background: rgba(0, 171, 240, 0.1);
+  border: 1px solid #00abf0;
+  color: #00abf0;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.security-card-description {
+  color: #cdd6f4;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.security-card-footer {
+  margin-top: auto;
+}
+
+.security-card-link {
+  display: inline-block;
+  border: 2px solid #00abf0;
+  color: #00abf0;
+  padding: 8px 22px;
+  border-radius: 25px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.security-card-link:hover {
+  background: #00abf0;
+  color: #081b29;
+}
+
+.security-no-projects {
+  color: #888;
+  font-size: 16px;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Modal */
+.sec-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.sec-modal {
+  background: linear-gradient(145deg, #0a2137, #063d65);
+  border: 2px solid #00abf0;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 171, 240, 0.25);
+  animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.sec-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #00abf0;
+  color: #00abf0;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1;
+}
+
+.sec-modal-close:hover {
+  background: #00abf0;
+  color: #081b29;
+}
+
+.sec-modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px 14px 0 0;
+  background: #04192a;
+}
+
+.sec-modal-placeholder {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, #0d2d4a, #052d4a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  border-radius: 14px 14px 0 0;
+}
+
+.sec-modal-body {
+  padding: 28px 32px 32px;
+}
+
+.sec-modal-title {
+  color: #00abf0;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.sec-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.sec-modal-description {
+  color: #cdd6f4;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .security-projects {
+    padding: 20px 5% 60px;
+  }
+
+  .security-category-title {
+    font-size: 28px;
+  }
+
+  .security-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
