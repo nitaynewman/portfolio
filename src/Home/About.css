@@ -287,6 +287,13 @@
   overflow: hidden;
 }
 
+a.education-card--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .education-card::before {
   content: '';
   position: absolute;

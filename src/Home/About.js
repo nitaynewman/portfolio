@@ -2,6 +2,8 @@ import React from 'react';
 import './About.css';
 import { FaCode, FaReact, FaCodepen, FaDatabase, FaCodeBranch, FaFileCode, FaShieldAlt, FaNetworkWired, FaServer, FaLock, FaUserShield, FaKey } from "react-icons/fa";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 
 const About = ({ id }) => {
   return (
@@ -235,17 +237,22 @@ const About = ({ id }) => {
               <li>FortiGate NGFW deployment & configuration</li>
             </ul>
           </div>
-          <div className="education-card">
+          <a
+            href={`${API_BASE_URL}/data/diploma/secure-development`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="education-card education-card--link"
+          >
             <div className="education-icon">🛡️</div>
-            <h3>Secure Development – 40 Hours</h3>
+            <h3>Secure Development – 45 Hours</h3>
             <h4>John Bryce College, Tel Aviv</h4>
-            <span className="education-date">Oct 2023 – Nov 2023</span>
+            <span className="education-date">07/04/2024 – 11/04/2024</span>
             <ul className="education-list">
               <li>OWASP Proactive Controls & secure coding lifecycle</li>
               <li>Cryptography: symmetric/asymmetric, hashing, PKI</li>
               <li>Identity & access management: JWT, OAuth 2.0, OIDC</li>
             </ul>
-          </div>
+          </a>
         </div>
       </section>
 
