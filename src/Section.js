@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import Navbar from './navbar';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import HexBackground from './HexBackground';
 
 export default function Section({ Strings, Title, Paragraph }) {
   const typedRef = useRef(null);
@@ -22,6 +23,7 @@ export default function Section({ Strings, Title, Paragraph }) {
 
   return (
     <section className="home">
+      <HexBackground />
       <Navbar />
       <div className="home-content">
         <h1>{Title}</h1>
