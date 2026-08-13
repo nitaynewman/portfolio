@@ -156,7 +156,12 @@ export default function Security() {
         <section className="about-section education-section">
           <h2 className="section-title">Training & Certifications</h2>
           <div className="education-grid">
-            <div className="education-card">
+            <a
+              href={`${API_BASE_URL}/data/diploma/cyber-security`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="education-card education-card--link"
+            >
               <div className="education-icon">🔒</div>
               <h3>Cyber Security Specialist – 650 Hours</h3>
               <h4>ITQ IT Experts</h4>
@@ -168,7 +173,7 @@ export default function Security() {
                 <li>FortiGate NGFW deployment & configuration</li>
                 <li>Firewall technologies & enterprise network security</li>
               </ul>
-            </div>
+            </a>
             <a
               href={`${API_BASE_URL}/data/diploma/secure-development`}
               target="_blank"

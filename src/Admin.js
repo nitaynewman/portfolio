@@ -51,6 +51,8 @@ const EMPTY_FORM = {
   // Security-specific
   link: "",
   tags: "",
+  selectedTags: [],
+  customTagInput: "",
   image: null,
 };
 
@@ -68,12 +70,30 @@ const PROJECT_CATEGORIES = {
   React_Projects: ["React_Apps", "React_Native_Apps"],
   Js_Projects: ["Js_App"],
   Security_Projects: [
-    "Networking",
-    "Cloud Infrastructure",
-    "Windows & AD",
-    "Linux",
-    "Automation",
-    "Secure Development",
+    "DevSecOps",
+    "Security Automations",
+    "Infrastructure Systems",
+  ],
+};
+
+const SECURITY_TAGS = {
+  "DevSecOps": [
+    "CI/CD Security", "SAST", "DAST", "Docker", "Kubernetes",
+    "GitHub Actions", "Secrets Management", "OWASP", "Vulnerability Scanning",
+    "Terraform", "Ansible", "IaC Security", "Container Security",
+    "SCA", "Dependency Scanning", "Code Review", "Security Gates",
+  ],
+  "Security Automations": [
+    "Python", "Bash", "PowerShell", "n8n", "Scripting",
+    "Log Analysis", "SIEM", "Alerting", "Threat Detection",
+    "Incident Response", "API Security", "Selenium", "Task Scheduling",
+    "Email Alerts", "Regex", "Webhook", "Data Parsing",
+  ],
+  "Infrastructure Systems": [
+    "Networking", "Cisco", "Firewall", "VPN", "FortiGate",
+    "Windows Server", "Active Directory", "Linux", "AWS", "Azure",
+    "S3", "IAM", "Zero Trust", "PKI", "TLS/SSL", "DNS",
+    "DHCP", "Subnetting", "VLAN", "NAT", "SSH Hardening",
   ],
 };
 
@@ -94,9 +114,29 @@ export default function AdminAddProject() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-      ...(name === "project_type" ? { category: "", customCategory: "" } : {}),
-      ...(name === "category" && value !== "Other" ? { customCategory: "" } : {}),
+      ...(name === "project_type" ? { category: "", customCategory: "", selectedTags: [], tags: "" } : {}),
+      ...(name === "category" ? { customCategory: "", selectedTags: [], tags: "" } : {}),
     }));
+  };
+
+  const toggleTag = (tag) => {
+    setFormData((prev) => {
+      const has = prev.selectedTags.includes(tag);
+      const next = has ? prev.selectedTags.filter((t) => t !== tag) : [...prev.selectedTags, tag];
+      return { ...prev, selectedTags: next, tags: next.join(", ") };
+    });
+  };
+
+  const addCustomTag = () => {
+    const tag = formData.customTagInput.trim();
+    if (!tag || formData.selectedTags.includes(tag)) {
+      setFormData((prev) => ({ ...prev, customTagInput: "" }));
+      return;
+    }
+    setFormData((prev) => {
+      const next = [...prev.selectedTags, tag];
+      return { ...prev, selectedTags: next, tags: next.join(", "), customTagInput: "" };
+    });
   };
 
   const handleFileChange = (e) => {
@@ -269,17 +309,41 @@ export default function AdminAddProject() {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="tags">Tags (Optional)</label>
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                value={formData.tags}
-                onChange={handleInputChange}
-                placeholder="e.g. IPsec, Cisco, VPN"
-              />
-            </div>
+            {formData.category && SECURITY_TAGS[formData.category] && (
+              <div className="form-group">
+                <label>Tags</label>
+                <div className="tag-chips">
+                  {SECURITY_TAGS[formData.category].map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      className={`tag-chip${formData.selectedTags.includes(tag) ? " tag-chip--active" : ""}`}
+                      onClick={() => toggleTag(tag)}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <div className="custom-tag-row">
+                  <input
+                    type="text"
+                    className="custom-tag-input"
+                    placeholder="Add custom tag…"
+                    value={formData.customTagInput}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, customTagInput: e.target.value }))}
+                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addCustomTag(); } }}
+                  />
+                  <button type="button" className="custom-tag-add" onClick={addCustomTag}>
+                    Add
+                  </button>
+                </div>
+                {formData.selectedTags.length > 0 && (
+                  <small className="tags-preview">
+                    Selected: {formData.tags}
+                  </small>
+                )}
+              </div>
+            )}
 
             <div className="form-group">
               <label htmlFor="image">Screenshot / Diagram (Optional)</label>

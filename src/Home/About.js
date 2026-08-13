@@ -225,7 +225,12 @@ const About = ({ id }) => {
               <li>5 units English</li>
             </ul>
           </div>
-          <div className="education-card">
+          <a
+            href={`${API_BASE_URL}/data/diploma/cyber-security`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="education-card education-card--link"
+          >
             <div className="education-icon">🔒</div>
             <h3>Cyber Security Specialist – 650 Hours</h3>
             <h4>ITQ IT Experts</h4>
@@ -236,7 +241,7 @@ const About = ({ id }) => {
               <li>Linux Essentials & administration fundamentals</li>
               <li>FortiGate NGFW deployment & configuration</li>
             </ul>
-          </div>
+          </a>
           <a
             href={`${API_BASE_URL}/data/diploma/secure-development`}
             target="_blank"
